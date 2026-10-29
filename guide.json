@@ -1,0 +1,102 @@
+{
+  "owner": "JUTZUGC",
+  "code": "JUTZUGC",
+  "project": {
+    "key": "meltype",
+    "nameCn": "Meltype",
+    "repoName": "meltype-deploy-guide",
+    "oneLiner": "1.4k stars，GPL-3.0，自动切换日文/英文的本地输入法",
+    "officialRepo": "https://github.com/yksr-melt/Meltype",
+    "officialDocs": "https://github.com/yksr-melt/Meltype/blob/main/README.md",
+    "stars": "1.4k",
+    "license": "GPL-3.0",
+    "highlights": [
+      "自动判断：罗马字直接打，日文与英文按上下文切换",
+      "不用半角/全角键：减少输入法切换打断",
+      "代码友好：代码编辑器里只在注释与字符串中启用日文",
+      "两种模式：系统 IME 或独立转换框",
+      "候选可点击：转换候选按系统主题显示",
+      "本地处理：输入内容不上传"
+    ],
+    "mcpSupport": "Meltype 是本地输入法，不含 MCP；本仓库的 MCP 只提供安装步骤、IME 配置与常见问题。",
+    "webuiUrl": "",
+    "adapterPorts": "",
+    "collectedAt": "2026-10-28",
+    "verification": [
+      [
+        "Release v1.4.0 的 Windows / macOS / Linux 安装包与 SHA256 digest 已核对",
+        "已核对 2026-10-28"
+      ],
+      [
+        "README 与 USAGE 确认 IME 注册、Win+Space 切换与安全边界",
+        "已核对 2026-10-28"
+      ],
+      [
+        "未实测安装（会修改系统输入法）",
+        "说明 2026-10-28"
+      ],
+      [
+        "非目标宿主调用被拦截（HOST_NOT_ALLOWED）",
+        "已验证 2026-10-28"
+      ]
+    ],
+    "deploy": {
+      "type": "binary",
+      "steps": [
+        "if [ \"$(uname -s)\" = \"Darwin\" ]; then url=https://github.com/yksr-melt/Meltype/releases/download/v1.4.0/Meltype-1.4.0-mac.zip ; want=2ab38a85acd1b5f7098a0850fb52fc2c9c3e4bd3089ccaaf185ce419d7ec0e35 ; file=Meltype.zip ; else if [ \"$(uname -m)\" = \"aarch64\" ] || [ \"$(uname -m)\" = \"arm64\" ]; then url=https://github.com/yksr-melt/Meltype/releases/download/v1.4.0/meltype_1.4.0_arm64.deb ; want=dfcf3a7e358f8f58ffbc8a3f226e21d0be9bbbae292a36b1c7c835ee3b7d2ce8 ; file=meltype.deb ; else url=https://github.com/yksr-melt/Meltype/releases/download/v1.4.0/meltype_1.4.0_amd64.deb ; want=015b5124ce8c0a5e1a003019235d310c1ae1845511e24bd2197800cdd6099ca9 ; file=meltype.deb ; fi ; fi",
+        "curl -fL -o \"$file\" \"$url\"",
+        "if [ \"$file\" = \"meltype.deb\" ]; then echo \"$want  $file\" | sha256sum -c - ; sudo dpkg -i \"$file\" || sudo apt-get install -f -y ; else echo \"$want  $file\" | shasum -a 256 -c - ; unzip -o \"$file\" ; open Meltype.app ; fi"
+      ],
+      "stepsPs": [
+        "curl.exe -L --fail -o Meltype-setup.exe \"https://github.com/yksr-melt/Meltype/releases/download/v1.4.0/Meltype-1.4.0-setup.exe\"",
+        "if ((Get-FileHash Meltype-setup.exe -Algorithm SHA256).Hash.ToLower() -ne 'aa1e19c239d93773e6f9a852bd297bc9ef2c849003f85c484999ac2059f29460') { throw 'SHA256 校验失败，请重新下载' }",
+        "Start-Process -FilePath .\\Meltype-setup.exe"
+      ],
+      "source": "https://github.com/yksr-melt/Meltype/releases/tag/v1.4.0"
+    },
+    "pitfalls": [
+      "装完没反应：确认托盘里有 Meltype.exe，且模式是 Meltype IME",
+      "切换不到 Meltype：用 Win + Space，别只按半角/全角",
+      "游戏里弹出切换提示：到系统输入语言热键里把 Ctrl + Shift 设为不分配",
+      "管理员程序里不转换：这是安全设计，普通权限程序才生效",
+      "候选不显示：确认输入框不是密码框或无痕窗口",
+      "想恢复原输入法：托盘退出 Meltype，或在系统设置里切换默认输入法",
+      "卸载后其他用户也不能用：重新运行 Install.cmd 或 Install-Meltype.ps1 恢复"
+    ]
+  },
+  "gate": {
+    "allow": [
+      "dumate"
+    ],
+    "label": "百度搭子",
+    "url": "https://www.dumate.cn/",
+    "guideUrl": "https://github.com/JUTZUGC/meltype-deploy-guide",
+    "howToFix": [
+      "1. 打开 https://www.dumate.cn/ ，下载并安装「百度搭子」电脑端（Windows / macOS）",
+      "2. 用账号登录",
+      "3. 在对话窗口发送：你好，帮我从 github 部署 JUTZUGC/meltype-deploy-guide 到我的电脑上",
+      "4. 部署完成后，在同一对话窗口里继续使用"
+    ],
+    "hint": "请改用「百度搭子」部署后再使用；本工具没有网页版入口。",
+    "onError": "allow"
+  },
+  "keywords": [
+    "Meltype 安装",
+    "Meltype 教程",
+    "日文输入法 开源",
+    "日语 罗马字 输入",
+    "自动切换 日文 英文",
+    "Windows IME 开源",
+    "Meltype 中文",
+    "日语输入 半角全角",
+    "本地 输入法",
+    "meltype deploy guide"
+  ],
+  "topics": [
+    "ime",
+    "japanese",
+    "input-method",
+    "windows",
+    "privacy"
+  ]
+}

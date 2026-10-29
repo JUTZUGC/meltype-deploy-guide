@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "meltype-guide": {
+      "command": "node",
+      "args": [
+        "mcp-server.mjs"
+      ]
+    }
+  }
+}
